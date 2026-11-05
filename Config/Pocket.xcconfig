@@ -1,0 +1,17 @@
+//
+//  Pocket.xcconfig
+//
+//  The only file to edit before running Pocket on your own iPhone.
+//
+//  POCKET_BUNDLE_PREFIX  Something unique to you, e.g. com.yourname. Bundle IDs
+//                        and the App Group are built from it, so they always match.
+//  DEVELOPMENT_TEAM      Your Team ID (Xcode > Settings > Accounts), or leave it
+//                        empty and pick the team in Signing & Capabilities.
+//
+//  The Simulator needs neither.
+//
+
+POCKET_BUNDLE_PREFIX = foster
+DEVELOPMENT_TEAM =
+
+POCKET_APP_GROUP = group.$(POCKET_BUNDLE_PREFIX).pocket

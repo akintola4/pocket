@@ -1,0 +1,21 @@
+# macOS
+.DS_Store
+
+# Editor / tooling
+/.claude
+
+# Xcode user data
+xcuserdata/
+*.xcuserstate
+*.xcuserdatad/
+*.xcscmblueprint
+*.xccheckout
+
+# Build artifacts
+build/
+DerivedData/
+*.xcresult
+
+# Swift Package Manager
+.swiftpm/
+.build/
