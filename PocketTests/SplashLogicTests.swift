@@ -66,4 +66,11 @@ struct SplashLogicTests {
         #expect(SplashLogic.appScale(at: t.diveStarts, in: t) < 1)
         #expect(abs(SplashLogic.appScale(at: t.total, in: t) - 1) < 0.001)
     }
+
+    @Test func `the credit fades in with the coins and out with the dive`() {
+        let t = SplashLogic.Timeline()
+        #expect(SplashLogic.creditOpacity(at: 0, in: t) == 0)
+        #expect(SplashLogic.creditOpacity(at: t.lastLanding, in: t) == 1)
+        #expect(abs(SplashLogic.creditOpacity(at: t.total, in: t)) < 0.001)
+    }
 }

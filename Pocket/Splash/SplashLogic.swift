@@ -127,6 +127,11 @@ nonisolated enum SplashLogic {
         0.94 + 0.06 * CGFloat(diveProgress(at: t, in: timeline))
     }
 
+    /// The "Made by" credit: fades in with the first coin, out with the dive.
+    static func creditOpacity(at t: Double, in timeline: Timeline) -> Double {
+        min(progress(t, over: timeline.fall * 0.75), 1 - diveProgress(at: t, in: timeline))
+    }
+
     static let diveCurve = UnitCurve.bezier(startControlPoint: UnitPoint(x: 0.32, y: 0.72),
                                             endControlPoint: UnitPoint(x: 0, y: 1))
 

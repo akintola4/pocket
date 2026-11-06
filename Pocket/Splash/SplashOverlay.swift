@@ -30,14 +30,19 @@ struct SplashOverlay: View {
     var body: some View {
         ZStack {
             if reduceMotion {
-                still
+                still.ignoresSafeArea()
+                credit
             } else {
                 TimelineView(.animation(paused: start == nil)) { context in
-                    frame(at: start.map { context.date.timeIntervalSince($0) } ?? 0)
+                    let t = start.map { context.date.timeIntervalSince($0) } ?? 0
+                    ZStack {
+                        // Full screen, so the pocket sits where the launch image did.
+                        frame(at: t).ignoresSafeArea()
+                        credit.opacity(SplashLogic.creditOpacity(at: t, in: timeline))
+                    }
                 }
             }
         }
-        .ignoresSafeArea()
         .opacity(skipped ? 0 : 1)
         .contentShape(.rect)
         .onTapGesture(perform: skip)
@@ -84,6 +89,26 @@ struct SplashOverlay: View {
         ZStack {
             PocketMark.green
             PocketMarkView()
+        }
+    }
+
+    /// "Made by" and the DEVAKINTOLA wordmark, above the home indicator. The
+    /// launch screen can only hold one centred image, so this fades in with
+    /// the first coin rather than popping on.
+    private var credit: some View {
+        VStack {
+            Spacer()
+            HStack(alignment: .center, spacing: 8) {
+                Text("Made by")
+                    .font(.system(.subheadline, design: .rounded, weight: .semibold))
+                Image("DevAkintola")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(height: 24)
+                    .accessibilityLabel("DevAkintola")
+            }
+            .foregroundStyle(.white)
+            .padding(.bottom, 12)
         }
     }
 
