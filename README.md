@@ -73,6 +73,8 @@ Both are in the scheme, switched off. Turn them on under Product › Scheme › 
 
 - `-PocketOffline` makes the app act as if the phone has no network. It never makes a request, and the label says "offline". Use it to check the cached and built-in paths without turning off your Mac's Wi-Fi.
 - `-PocketOpenPicker` opens the currency list on launch.
+- `-PocketNoSplash` skips the opening animation and opens straight on the converter.
+- `-PocketSplashSlow` plays the opening animation 4× slower. `scripts/record-splash.sh` records it at both speeds in the Simulator and opens the videos.
 
 ## Rates source
 
