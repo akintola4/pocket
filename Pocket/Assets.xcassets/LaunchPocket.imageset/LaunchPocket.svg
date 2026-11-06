@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="120" height="120.923" viewBox="0 0 520 524">
+  <!-- The app icon's pocket in its own 520 x 524 grid. PocketMark.swift draws the same paths for the splash. -->
+  <path d="M0 0H520V113H0Z" fill="#fff"/>
+  <path d="M0 127H520V331C520 436 403 524 260 524C117 524 0 436 0 331Z" fill="#fff"/>
+  <path d="M34 34H468Q486 34 486 52V336C486 426 388 490 260 490C132 490 34 426 34 336Z" fill="none" stroke="#008751" stroke-width="16" stroke-linecap="round" stroke-dasharray="0 36"/>
+</svg>

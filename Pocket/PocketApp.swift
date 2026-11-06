@@ -16,11 +16,36 @@ struct PocketApp: App {
     @State private var settings = AppSettings()
     @State private var store = RatesStore(client: RatesClient(isOffline: LaunchOptions.forceOffline))
     @State private var connectivity = ConnectivityMonitor(forcedOffline: LaunchOptions.forceOffline)
+    /// Once per cold launch. Coming back from the background skips it.
+    @State private var showSplash = !LaunchOptions.skipSplash
+    @State private var splashStart: Date?
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    private let splashTimeline = SplashLogic.Timeline().slowed(by: LaunchOptions.splashSlowdown)
 
     var body: some Scene {
         WindowGroup {
-            RootView(store: store, settings: settings, connectivity: connectivity)
+            ZStack {
+                TimelineView(.animation(paused: !showSplash)) { context in
+                    RootView(store: store, settings: settings, connectivity: connectivity)
+                        .scaleEffect(appScale(at: context.date))
+                }
+                if showSplash {
+                    SplashOverlay(
+                        symbols: SplashLogic.coinCodes(home: settings.defaultTo).map { CurrencyCatalog.info(for: $0).symbol },
+                        haptics: settings.haptics,
+                        timeline: splashTimeline,
+                        onStart: { splashStart = $0 },
+                        onFinish: { showSplash = false }
+                    )
+                }
+            }
         }
+    }
+
+    private func appScale(at date: Date) -> CGFloat {
+        guard showSplash, !reduceMotion else { return 1 }
+        let t = splashStart.map { date.timeIntervalSince($0) } ?? 0
+        return SplashLogic.appScale(at: t, in: splashTimeline)
     }
 }
 
@@ -90,6 +115,24 @@ enum LaunchOptions {
         ProcessInfo.processInfo.arguments.contains("-PocketOffline")
         #else
         false
+        #endif
+    }
+
+    /// `-PocketNoSplash`: open straight on the converter, for screenshots.
+    static var skipSplash: Bool {
+        #if DEBUG
+        ProcessInfo.processInfo.arguments.contains("-PocketNoSplash")
+        #else
+        false
+        #endif
+    }
+
+    /// `-PocketSplashSlow`: play the opening animation 4× slower, for tuning it.
+    static var splashSlowdown: Double {
+        #if DEBUG
+        ProcessInfo.processInfo.arguments.contains("-PocketSplashSlow") ? 4 : 1
+        #else
+        1
         #endif
     }
 
