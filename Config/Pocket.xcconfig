@@ -15,3 +15,6 @@ POCKET_BUNDLE_PREFIX = foster
 DEVELOPMENT_TEAM =
 
 POCKET_APP_GROUP = group.$(POCKET_BUNDLE_PREFIX).pocket
+
+// Optional, git-ignored overrides (your team and prefix) so they stay out of the repo.
+#include? "Local.xcconfig"

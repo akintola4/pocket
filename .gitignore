@@ -19,3 +19,6 @@ DerivedData/
 # Swift Package Manager
 .swiftpm/
 .build/
+
+# Personal signing overrides
+Config/Local.xcconfig
