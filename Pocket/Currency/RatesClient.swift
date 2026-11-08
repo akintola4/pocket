@@ -22,6 +22,11 @@ struct RatesClient {
     /// device had no network.
     var isOffline = false
 
+    /// Set by the `-PocketDemoRates` launch argument: "download" the bundled
+    /// snapshot instead of today's rates, stamped 09:41 today, so screenshots
+    /// and UI tests always show $100 → ₦134,660.13 no matter what the market did.
+    var usesDemoRates = false
+
     private static let session: URLSession = {
         let config = URLSessionConfiguration.ephemeral
         config.timeoutIntervalForRequest = 10
@@ -33,6 +38,7 @@ struct RatesClient {
 
     func fetchLatest() async throws -> RatesSnapshot {
         if isOffline { throw RatesError.offline }
+        if usesDemoRates { return try Self.demoRates() }
 
         var lastError: Error = RatesError.invalidPayload
         for url in Self.endpoints {
@@ -46,5 +52,17 @@ struct RatesClient {
             }
         }
         throw lastError
+    }
+
+    private static func demoRates(now: Date = Date()) throws -> RatesSnapshot {
+        guard let bundled = RatesPersistence.loadBundled() else { throw RatesError.invalidPayload }
+        let nineFortyOne = Calendar.current.date(bySettingHour: 9, minute: 41, second: 0, of: now) ?? now
+        return RatesSnapshot(
+            base: bundled.base,
+            date: bundled.date,
+            fetchedAt: min(nineFortyOne, now),
+            source: bundled.source,
+            rates: bundled.rates
+        )
     }
 }

@@ -148,6 +148,7 @@ struct ConverterView: View {
                     .focused($amountFocused)
                     .lineLimit(1)
                     .accessibilityLabel("Amount in \(CurrencyCatalog.info(for: from).localizedName)")
+                    .accessibilityIdentifier("amount-field")
             }
         }
         .contentShape(.rect)
@@ -165,6 +166,7 @@ struct ConverterView: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .textSelection(.enabled)
                 .accessibilityLabel("\(amountForSpeech) is \(resultText)")
+                .accessibilityIdentifier("converted-amount")
                 .accessibilityAddTraits(.updatesFrequently)
         }
     }

@@ -14,7 +14,7 @@ import SwiftUI
 @main
 struct PocketApp: App {
     @State private var settings = AppSettings()
-    @State private var store = RatesStore(client: RatesClient(isOffline: LaunchOptions.forceOffline))
+    @State private var store = RatesStore(client: RatesClient(isOffline: LaunchOptions.forceOffline, usesDemoRates: LaunchOptions.demoRates))
     @State private var connectivity = ConnectivityMonitor(forcedOffline: LaunchOptions.forceOffline)
     /// Once per cold launch. Coming back from the background skips it.
     @State private var showSplash = !LaunchOptions.skipSplash
@@ -53,8 +53,9 @@ struct PocketApp: App {
 
 enum PocketTool: String, CaseIterable, Identifiable {
     case currency
-    // Planned, in this order: qrScanner, flashlight (with Morse code).
-    // Units became its own app, Tape (github.com/akintola4/tape).
+    // Planned: flashlight (with Morse code).
+    // Units became its own app, Tape (github.com/akintola4/tape), and the QR
+    // scanner became Lensir (github.com/akintola4/lensir).
 
     var id: String { rawValue }
 
@@ -134,6 +135,17 @@ enum LaunchOptions {
         ProcessInfo.processInfo.arguments.contains("-PocketSplashSlow") ? 4 : 1
         #else
         1
+        #endif
+    }
+
+    /// `-PocketDemoRates`: use the bundled rates as if they were downloaded at
+    /// 09:41 today, for screenshots and UI tests that need the same numbers
+    /// every run.
+    static var demoRates: Bool {
+        #if DEBUG
+        ProcessInfo.processInfo.arguments.contains("-PocketDemoRates")
+        #else
+        false
         #endif
     }
 
