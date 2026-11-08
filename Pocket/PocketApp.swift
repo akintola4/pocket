@@ -53,7 +53,8 @@ struct PocketApp: App {
 
 enum PocketTool: String, CaseIterable, Identifiable {
     case currency
-    // Planned, in this order: units, qrScanner, flashlight (with Morse code).
+    // Planned, in this order: qrScanner, flashlight (with Morse code).
+    // Units became its own app, Tape (github.com/akintola4/tape).
 
     var id: String { rawValue }
 
