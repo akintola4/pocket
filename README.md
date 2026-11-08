@@ -109,9 +109,10 @@ Each tool is a case of `PocketTool` in `PocketApp.swift`. Add a case and its vie
 ## Roadmap
 
 1. Currency converter (this release)
-2. Unit converter, for length, weight, temperature, volume and cooking measures
-3. QR scanner that reads codes on the phone and never sends them anywhere
-4. Flashlight with a Morse code mode, for sending messages by light
+2. QR scanner that reads codes on the phone and never sends them anywhere
+3. Flashlight with a Morse code mode, for sending messages by light
+
+The unit converter grew into its own app: [Tape](https://github.com/akintola4/tape) does length, area (including plots of land), weight, volume, temperature and cooking measures, all offline.
 
 ## License
 
