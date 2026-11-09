@@ -11,7 +11,7 @@
 //  The Simulator needs neither.
 //
 
-POCKET_BUNDLE_PREFIX = foster
+POCKET_BUNDLE_PREFIX = com.example
 DEVELOPMENT_TEAM =
 
 POCKET_APP_GROUP = group.$(POCKET_BUNDLE_PREFIX).pocket

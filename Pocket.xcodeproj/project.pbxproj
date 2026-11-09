@@ -25,6 +25,13 @@
 			remoteGlobalIDString = B0C4E7000000000000000011;
 			remoteInfo = Pocket;
 		};
+		B0C4E7000000000000000036 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B0C4E7000000000000000001 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B0C4E7000000000000000011;
+			remoteInfo = Pocket;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -45,6 +52,7 @@
 		B0C4E7000000000000000005 /* Pocket.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pocket.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B0C4E7000000000000000006 /* PocketWidget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = PocketWidget.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		B0C4E7000000000000000007 /* PocketTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PocketTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		B0C4E7000000000000000030 /* PocketUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PocketUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B0C4E7000000000000000008 /* Pocket.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Pocket.xcconfig; sourceTree = "<group>"; };
 		B0C4E7000000000000000009 /* Pocket.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Pocket.entitlements; sourceTree = "<group>"; };
 		B0C4E700000000000000000A /* PocketWidget.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PocketWidget.entitlements; sourceTree = "<group>"; };
@@ -73,6 +81,11 @@
 			path = PocketTests;
 			sourceTree = "<group>";
 		};
+		B0C4E7000000000000000031 /* PocketUITests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = PocketUITests;
+			sourceTree = "<group>";
+		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +110,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		B0C4E7000000000000000032 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -107,6 +127,7 @@
 				B0C4E700000000000000000E /* Shared */,
 				B0C4E700000000000000000F /* PocketWidget */,
 				B0C4E7000000000000000010 /* PocketTests */,
+				B0C4E7000000000000000031 /* PocketUITests */,
 				B0C4E7000000000000000004 /* Config */,
 				B0C4E7000000000000000003 /* Products */,
 			);
@@ -118,6 +139,7 @@
 				B0C4E7000000000000000005 /* Pocket.app */,
 				B0C4E7000000000000000006 /* PocketWidget.appex */,
 				B0C4E7000000000000000007 /* PocketTests.xctest */,
+				B0C4E7000000000000000030 /* PocketUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -208,6 +230,29 @@
 			productReference = B0C4E7000000000000000007 /* PocketTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		B0C4E7000000000000000035 /* PocketUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B0C4E700000000000000003A /* Build configuration list for PBXNativeTarget "PocketUITests" */;
+			buildPhases = (
+				B0C4E7000000000000000033 /* Sources */,
+				B0C4E7000000000000000032 /* Frameworks */,
+				B0C4E7000000000000000034 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B0C4E7000000000000000037 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				B0C4E7000000000000000031 /* PocketUITests */,
+			);
+			name = PocketUITests;
+			packageProductDependencies = (
+			);
+			productName = PocketUITests;
+			productReference = B0C4E7000000000000000030 /* PocketUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -225,6 +270,10 @@
 						CreatedOnToolsVersion = 27.0;
 					};
 					B0C4E7000000000000000013 = {
+						CreatedOnToolsVersion = 27.0;
+						TestTargetID = B0C4E7000000000000000011;
+					};
+					B0C4E7000000000000000035 = {
 						CreatedOnToolsVersion = 27.0;
 						TestTargetID = B0C4E7000000000000000011;
 					};
@@ -247,6 +296,7 @@
 				B0C4E7000000000000000011 /* Pocket */,
 				B0C4E7000000000000000012 /* PocketWidget */,
 				B0C4E7000000000000000013 /* PocketTests */,
+				B0C4E7000000000000000035 /* PocketUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -267,6 +317,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		B0C4E700000000000000001D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B0C4E7000000000000000034 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -297,6 +354,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		B0C4E7000000000000000033 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -309,6 +373,11 @@
 			isa = PBXTargetDependency;
 			target = B0C4E7000000000000000011 /* Pocket */;
 			targetProxy = B0C4E7000000000000000021 /* PBXContainerItemProxy */;
+		};
+		B0C4E7000000000000000037 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B0C4E7000000000000000011 /* Pocket */;
+			targetProxy = B0C4E7000000000000000036 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -449,7 +518,6 @@
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -464,7 +532,7 @@
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -483,7 +551,6 @@
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -498,7 +565,7 @@
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -528,7 +595,7 @@
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -558,7 +625,7 @@
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -577,7 +644,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Pocket.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Pocket";
 			};
 			name = Debug;
@@ -597,8 +664,46 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Pocket.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Pocket";
+			};
+			name = Release;
+		};
+		B0C4E7000000000000000038 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "$(POCKET_BUNDLE_PREFIX).pocket.uitests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+				TEST_TARGET_NAME = Pocket;
+			};
+			name = Debug;
+		};
+		B0C4E7000000000000000039 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "$(POCKET_BUNDLE_PREFIX).pocket.uitests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+				TEST_TARGET_NAME = Pocket;
 			};
 			name = Release;
 		};
@@ -637,6 +742,15 @@
 			buildConfigurations = (
 				B0C4E7000000000000000029 /* Debug */,
 				B0C4E700000000000000002A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B0C4E700000000000000003A /* Build configuration list for PBXNativeTarget "PocketUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B0C4E7000000000000000038 /* Debug */,
+				B0C4E7000000000000000039 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

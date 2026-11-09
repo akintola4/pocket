@@ -40,6 +40,17 @@
                ReferencedContainer = "container:Pocket.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO"
+            parallelizable = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "B0C4E7000000000000000035"
+               BuildableName = "PocketUITests.xctest"
+               BlueprintName = "PocketUITests"
+               ReferencedContainer = "container:Pocket.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction
@@ -69,6 +80,18 @@
          </CommandLineArgument>
          <CommandLineArgument
             argument = "-PocketOpenPicker"
+            isEnabled = "NO">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "-PocketNoSplash"
+            isEnabled = "NO">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "-PocketSplashSlow"
+            isEnabled = "NO">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "-PocketDemoRates"
             isEnabled = "NO">
          </CommandLineArgument>
       </CommandLineArguments>

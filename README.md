@@ -16,12 +16,17 @@ It isn't on the App Store. You clone it, open it in Xcode and run it on your own
 |---|---|---|
 | ![Offline with cached rates](docs/screenshots/offline-cached.png) | ![First launch with no network, built-in rates](docs/screenshots/airplane-first-launch.png) | ![Home Screen widgets](docs/screenshots/widgets-home.png) |
 
-![Lock Screen widget](docs/screenshots/widget-lock.png)
+| Opening animation | Lock Screen widget |
+|---|---|
+| ![Coins drop into the pocket, then the app opens](docs/screenshots/splash.gif) | ![Lock Screen widget](docs/screenshots/widget-lock.png) |
 
-The two offline screenshots use the `-PocketOffline` launch argument (see below), which keeps the app off the network completely. The Mac running the Simulator stayed online. For the airplane-mode one, I deleted the app, reinstalled it and opened it with that flag, so it had no cache and fell back to the rates it ships with.
+`scripts/screenshots.sh` takes all of these in the Simulator. The converter screenshots use `-PocketDemoRates`, so they show the rates that ship with the app instead of whatever the market did that morning. The two offline screenshots use `-PocketOffline` (see below), which keeps the app off the network completely while the Mac stays online. For the airplane-mode one, the script installs the app fresh and opens it with that flag, so it has no cache and falls back to the rates it ships with.
+
+The Home Screen widgets are real, added through the Simulator's Add Widget sheet by a UI test. The Lock Screen one is drawn from the widget's own view onto a plain background, because the Simulator's Lock Screen can't be cleared of its stock widget and notification without tapping through the wallpaper editor.
 
 ## What the currency tool does
 
+- It opens with a two-second animation: five coins drop into the pocket, with your default "to" currency last, then the pocket dives into the app. Each coin lands with a light haptic. With Reduce Motion on, there are no coins or dive: the pocket holds for a moment and fades.
 - Type an amount and the result updates as you go, with each currency's own symbol and decimals: ₦134,660.13, GH₵1,234.50, KSh 1,000.00, ¥1,235, BD 1.235. Number formatting follows your phone's region.
 - It opens on USD → NGN. Tap a currency to change it, or tap the swap button between them.
 - The chips under the result are your favourites, then the currencies you used most recently.
@@ -51,7 +56,7 @@ Pick the Pocket scheme and a simulator (I use iPhone 17 Pro), then press Run. Yo
 
 ### On your own iPhone
 
-1. Open `Config/Pocket.xcconfig` and set `POCKET_BUNDLE_PREFIX` to something that's yours, such as `com.yourname`. The bundle IDs and the App Group (`group.<prefix>.pocket`) are all built from it, so they always match.
+1. Open `Config/Pocket.xcconfig` and set `POCKET_BUNDLE_PREFIX` to something that's yours, such as `com.yourname`, in place of `com.example`. The bundle IDs and the App Group (`group.<prefix>.pocket`) are all built from it, so they always match. To keep your prefix and team out of git, put both lines in `Config/Local.xcconfig` instead. It's git-ignored, and it overrides `Pocket.xcconfig`.
 2. Set `DEVELOPMENT_TEAM` there to your Team ID, or choose your team under Signing & Capabilities for both the Pocket and PocketWidget targets.
 3. Plug in your phone, select it and press Run. The first time, go to Settings › General › VPN & Device Management on the phone and trust your developer certificate.
 
@@ -65,13 +70,18 @@ If signing fails on the App Group, remove the App Groups capability from both ta
 xcodebuild test -scheme Pocket -destination 'platform=iOS Simulator,name=iPhone 17 Pro,OS=26.1'
 ```
 
-The 59 tests in `PocketTests` cover the pure logic: converting through the base currency, cross rates, rounding per currency, parsing the API payload and the bundled snapshot, reading and writing the cache, choosing between bundled and cached rates by date, the "out of date" and "offline" labels, and formatting for NGN, GHS, JPY (no decimals) and BHD (three). Leave out `OS=26.1` if your iPhone 17 Pro simulator runs the newest iOS.
+The 67 tests in `PocketTests` cover the pure logic: converting through the base currency, cross rates, rounding per currency, parsing the API payload and the bundled snapshot, reading and writing the cache, choosing between bundled and cached rates by date, the "out of date" and "offline" labels, formatting for NGN, GHS, JPY (no decimals) and BHD (three), and the opening animation's timing. Leave out `OS=26.1` if your iPhone 17 Pro simulator runs the newest iOS.
+
+`PocketUITests` has two XCTest UI tests: the app opens straight on the converter with `-PocketNoSplash`, and typing an amount updates the result. They use `-PocketDemoRates`, so the expected numbers never change.
+
+Two more are skipped unless `scripts/screenshots.sh` asks for them: one draws the Lock Screen widget, the other adds the widgets to the Simulator's Home Screen.
 
 ### Launch arguments (Debug builds)
 
-Both are in the scheme, switched off. Turn them on under Product › Scheme › Edit Scheme › Run › Arguments.
+They're all in the scheme, switched off. Turn them on under Product › Scheme › Edit Scheme › Run › Arguments.
 
 - `-PocketOffline` makes the app act as if the phone has no network. It never makes a request, and the label says "offline". Use it to check the cached and built-in paths without turning off your Mac's Wi-Fi.
+- `-PocketDemoRates` uses the rates that ship with the app as if they'd been downloaded at 09:41 today. It never makes a request. The screenshots and UI tests use it so $100 is always ₦134,660.13.
 - `-PocketOpenPicker` opens the currency list on launch.
 - `-PocketNoSplash` skips the opening animation and opens straight on the converter.
 - `-PocketSplashSlow` plays the opening animation 4× slower. `scripts/record-splash.sh` records it at both speeds in the Simulator and opens the videos.
@@ -98,10 +108,13 @@ python3 scripts/update-snapshot.py
 Pocket/            the app: tools, settings, components from swiftui-registry
   Currency/        ConverterView, CurrencyPickerSheet, RatesStore, RatesClient, ConnectivityMonitor
 Shared/            in both the app and the widget: ConversionLogic, RatesModel,
-                   PocketPersistence, CurrencyCatalog, Theme, Tokens, rates-snapshot.json
+                   PocketPersistence, CurrencyCatalog, Theme, Tokens, PocketWidgetViews,
+                   rates-snapshot.json
 PocketWidget/      Home Screen and Lock Screen widgets
 PocketTests/       Swift Testing suites for the shared logic
+PocketUITests/     XCTest UI tests for the converter
 Config/            Pocket.xcconfig (bundle prefix, team), entitlements, Info.plists
+scripts/           screenshots, splash recording, snapshot refresh
 ```
 
 Each tool is a case of `PocketTool` in `PocketApp.swift`. Add a case and its view and the tab bar appears. While there's only one tool, it stays hidden.
@@ -109,10 +122,12 @@ Each tool is a case of `PocketTool` in `PocketApp.swift`. Add a case and its vie
 ## Roadmap
 
 1. Currency converter (this release)
-2. QR scanner that reads codes on the phone and never sends them anywhere
-3. Flashlight with a Morse code mode, for sending messages by light
+2. Flashlight with a Morse code mode, for sending messages by light
 
-The unit converter grew into its own app: [Tape](https://github.com/akintola4/tape) does length, area (including plots of land), weight, volume, temperature and cooking measures, all offline.
+Two tools grew into their own apps:
+
+- [Tape](https://github.com/akintola4/tape) is the unit converter. It does length, area (including plots of land), weight, volume, temperature and cooking measures, all offline.
+- [Lensir](https://github.com/akintola4/lensir) is the QR scanner. It reads codes on the phone and never sends them anywhere.
 
 ## License
 
